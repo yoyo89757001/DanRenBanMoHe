@@ -163,6 +163,7 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
     ImageView touxiang;
     @BindView(R.id.tickerview)
     TickerView tickerview;
+    //kk
     @BindView(R.id.tickerview2)
     TickerView tickerview2;
     private String appId = "11644783";
