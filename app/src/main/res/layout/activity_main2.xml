@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:clipChildren="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.xiaojun.danrenbanmohe.camera.CameraPreview
+        android:id="@+id/preview"
+        android:layout_below="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <com.xiaojun.danrenbanmohe.view.FaceView
+        android:layout_width="match_parent"
+        android:id="@+id/fcview"
+        android:layout_below="@+id/top"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:layout_below="@+id/top"
+        android:background="#fc651c"
+        android:id="@+id/zhongjianview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ghhh"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="100px"
+        android:background="@drawable/kuang222"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <TextView
+            android:textSize="30px"
+            android:text="欢迎来到瑞瞳智能科技"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="24px"
+            android:text="年龄"
+            android:layout_below="@+id/ghhh"
+            android:paddingLeft="14px"
+            android:id="@+id/niii"
+            android:layout_marginTop="74px"
+            android:layout_centerHorizontal="true"
+            android:layout_width="650px"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="24px"
+            android:text="肤质"
+            android:layout_below="@+id/ghhh"
+            android:id="@+id/dld"
+            android:layout_marginLeft="20px"
+            android:layout_toRightOf="@+id/ll22"
+            android:layout_marginTop="124px"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="38px"
+            android:layout_toRightOf="@+id/ll22"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/dld"
+            android:text="黑眼圈"
+            android:id="@+id/fuzhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!--性别-->
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="24px"
+            android:text="性别"
+            android:layout_below="@+id/ghhh"
+            android:id="@+id/dld333"
+            android:layout_marginRight="6px"
+            android:layout_toLeftOf="@+id/ll22"
+            android:layout_marginTop="290px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="38px"
+            android:layout_toLeftOf="@+id/ll22"
+            android:layout_below="@+id/dld333"
+            android:text="男"
+            android:layout_marginRight="10px"
+            android:id="@+id/xingbie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="24px"
+            android:text="关注度"
+            android:layout_below="@+id/ghhh"
+            android:id="@+id/dld66"
+            android:layout_marginLeft="10px"
+            android:layout_toRightOf="@+id/ll22"
+            android:layout_marginTop="340px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="38px"
+            android:layout_marginLeft="14px"
+            android:layout_toRightOf="@+id/ll22"
+            android:layout_below="@+id/dld66"
+            android:text="80%"
+            android:id="@+id/guanzhudu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_below="@+id/ghhh"
+            android:layout_marginTop="100px"
+            android:clipChildren="false"
+            android:id="@+id/ll22"
+            android:background="@drawable/touxiang_bg"
+            android:layout_centerHorizontal="true"
+            android:layout_width="650px"
+            android:layout_height="380px">
+
+            <ImageView
+                android:id="@+id/touxiang"
+                android:layout_centerInParent="true"
+                android:layout_width="250px"
+                android:layout_height="250px" />
+
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="38px"
+                android:layout_marginLeft="2px"
+                android:text="23岁"
+                android:id="@+id/nianling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/ll22"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/hyyy"
+            android:layout_marginTop="60px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="38px"
+                android:text="今日魅力值: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.robinhood.ticker.TickerView
+                android:id="@+id/tickerview"
+                android:textColor="@color/white"
+                android:textSize="70px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/hyyy"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:id="@+id/bbnn"
+            android:layout_marginTop="30px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="34px"
+                android:text="颜值排名超过:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.robinhood.ticker.TickerView
+                android:id="@+id/tickerview2"
+                android:textColor="@color/white"
+                android:textSize="50px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="34px"
+                android:text="%的用户"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/bbnn"
+            android:layout_marginTop="30px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"
+                android:src="@drawable/shuaixing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="34px"
+                android:layout_centerInParent="true"
+                android:text="每天都被自己帅醒"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:background="@drawable/top_bg"
+        android:layout_width="match_parent"
+        android:id="@+id/top"
+        android:scaleType="fitXY"
+        android:layout_height="200px" />
+
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:layout_marginTop="40px"
+        android:layout_marginLeft="20px"
+        android:background="@drawable/logo_r"
+        android:layout_width="180px"
+        android:layout_height="40px" />
+
+    <TextView
+        android:textSize="30px"
+        android:text="总人数"
+        android:id="@+id/rfr"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70px"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textSize="30px"
+        android:text="100"
+        android:id="@+id/renshu"
+        android:layout_below="@+id/rfr"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4px"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textSize="30px"
+        android:id="@+id/xingqi"
+        android:layout_toLeftOf="@+id/shijian"
+        android:layout_marginTop="40px"
+        android:layout_marginRight="10px"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:textSize="30px"
+        android:id="@+id/shijian"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40px"
+        android:layout_marginRight="20px"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+
+        <ImageView
+            android:background="@drawable/zidonghuoqu88"
+            android:layout_below="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+<LinearLayout
+    android:layout_below="@+id/preview"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="390px"
+        android:scaleType="fitXY"
+        android:background="@drawable/logo2"
+        android:layout_height="220px" />
+
+</LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>
