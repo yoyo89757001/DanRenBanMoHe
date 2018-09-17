@@ -272,12 +272,11 @@ public class DateUtils {
     }
 
     public static String timesTwo(String time) {
-        SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        SimpleDateFormat sdr = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
         @SuppressWarnings("unused")
         long lcc = Long.valueOf(time);
       //  int i = Integer.parseInt(time);
-        String times = sdr.format(new Date(lcc));
-        return times;
+        return sdr.format(new Date(lcc));
     }
 
     public static String xiaoshi(String time) {

@@ -26,6 +26,9 @@ public class Subjects {
         this.faceToken = faceToken;
     }
 
+    public Subjects() {
+    }
+
     public Subjects(String sex, int age, float faceScore, byte[] faceToken) {
         this.sex = sex;
         this.age = age;

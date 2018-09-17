@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clipChildren="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -21,7 +22,303 @@
         android:id="@+id/fcview"
         android:layout_height="match_parent" />
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@+id/top"
+        android:background="#fc651c"
+        android:visibility="gone"
+        android:id="@+id/paihangview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:background="@drawable/paihang_bg"
+            android:layout_width="match_parent"
+            android:id="@+id/ph_1"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="120px"
+            android:layout_height="220px">
+
+
+            <RelativeLayout
+                android:id="@+id/gggggggg"
+                android:gravity="center"
+                android:layout_marginTop="10px"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                   android:layout_marginLeft="-33px"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/huangguan"
+                    android:layout_width="140px"
+                    android:layout_height="140px" />
+
+                    <TextView
+                        android:id="@+id/ph1_tv"
+                        android:layout_width="70px"
+                        android:textColor="@color/white"
+                        android:textSize="30px"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:text="1"
+                        android:background="@drawable/yuan_bg"
+                        android:layout_height="70px" />
+
+
+                <ImageView
+                    android:id="@+id/ph1_iv"
+                    android:layout_width="120px"
+                    android:layout_toRightOf="@+id/ph1_tv"
+                    android:layout_marginLeft="100px"
+                    android:layout_centerVertical="true"
+                    android:layout_height="120px" />
+
+
+                <TextView
+                    android:textSize="30px"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/ph1_ml"
+                    android:layout_marginLeft="40px"
+                    android:layout_toRightOf="@+id/ph1_iv"
+                    android:textColor="@color/white"
+                    android:text="魅力值 30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@drawable/paihang_bg"
+            android:layout_width="match_parent"
+            android:id="@+id/ph_2"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="-30px"
+            android:layout_height="220px">
+
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_marginTop="-15px"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/ph2_tv"
+                    android:layout_width="70px"
+                    android:textColor="@color/white"
+                    android:textSize="30px"
+                    android:gravity="center"
+                    android:text="2"
+                    android:background="@drawable/yuan_bg"
+                    android:layout_centerVertical="true"
+                    android:layout_height="70px" />
+
+
+                <ImageView
+                    android:id="@+id/ph2_iv"
+                    android:layout_width="120px"
+                    android:layout_toRightOf="@+id/ph2_tv"
+                    android:layout_marginLeft="100px"
+                    android:layout_centerVertical="true"
+                    android:layout_height="120px" />
+
+
+                <TextView
+                    android:textSize="30px"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/ph2_ml"
+                    android:layout_marginLeft="40px"
+                    android:layout_toRightOf="@+id/ph2_iv"
+                    android:textColor="@color/white"
+                    android:text="魅力值 30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@drawable/paihang_bg"
+            android:layout_width="match_parent"
+            android:id="@+id/ph_3"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="-30px"
+            android:layout_height="220px">
+
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_marginTop="-15px"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ph3_tv"
+                    android:layout_width="70px"
+                    android:textColor="@color/white"
+                    android:textSize="30px"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:text="3"
+                    android:background="@drawable/yuan_bg"
+                    android:layout_height="70px" />
+
+                <ImageView
+                    android:id="@+id/ph3_iv"
+                    android:layout_width="120px"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ph3_tv"
+                    android:layout_marginLeft="100px"
+                    android:layout_height="120px" />
+
+
+                <TextView
+                    android:textSize="30px"
+                    android:id="@+id/ph3_ml"
+                    android:layout_toRightOf="@+id/ph3_iv"
+                    android:textColor="@color/white"
+                    android:text="魅力值 30"
+                    android:layout_marginLeft="40px"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@drawable/paihang_bg"
+            android:layout_width="match_parent"
+            android:id="@+id/ph_4"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="-30px"
+            android:layout_height="220px">
+
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_marginTop="-15px"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ph4_tv"
+                    android:layout_width="70px"
+                    android:textColor="@color/white"
+                    android:textSize="30px"
+                    android:gravity="center"
+                    android:text="4"
+                    android:background="@drawable/yuan_bg"
+                    android:layout_centerVertical="true"
+                    android:layout_height="70px" />
+
+                <ImageView
+                    android:id="@+id/ph4_iv"
+                    android:layout_width="120px"
+                    android:layout_toRightOf="@+id/ph4_tv"
+                    android:layout_marginLeft="100px"
+                    android:layout_centerVertical="true"
+                    android:layout_height="120px" />
+
+
+                <TextView
+                    android:textSize="30px"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/ph4_ml"
+                    android:layout_marginLeft="40px"
+                    android:layout_toRightOf="@+id/ph4_iv"
+                    android:textColor="@color/white"
+                    android:text="魅力值 30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="30px"
+            android:layout_marginTop="50px"
+            app:cardBackgroundColor="#FDA659"
+            app:cardCornerRadius="6dp"
+            android:id="@+id/ph_cardview"
+            app:cardElevation="6dp"
+            android:layout_marginBottom="50px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <RelativeLayout
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/paihangnum_booton"
+                        android:layout_width="90px"
+                        android:textColor="@color/white"
+                        android:textSize="30px"
+                        android:gravity="center"
+                        android:text="2"
+                        android:background="@drawable/yuan_bg"
+                        android:layout_centerVertical="true"
+                        android:layout_height="90px" />
+
+                    <ImageView
+                        android:id="@+id/ph_touxiang_booton"
+                        android:layout_width="160px"
+                        android:layout_toRightOf="@+id/paihangnum_booton"
+                        android:layout_marginLeft="100px"
+                        android:layout_centerVertical="true"
+                        android:layout_height="160px" />
+                    <LinearLayout
+                        android:layout_toRightOf="@+id/ph_touxiang_booton"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="40px"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textSize="36px"
+                            android:id="@+id/meili_booton"
+                            android:textColor="@color/white"
+                            android:text="魅力值 30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:textSize="26px"
+                            android:id="@+id/nianling_booton"
+                            android:textColor="@color/white"
+                            android:text="年龄 30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_below="@+id/top"
@@ -54,7 +351,7 @@
             android:textSize="24px"
             android:text="年龄"
             android:layout_below="@+id/ghhh"
-            android:paddingLeft="6px"
+            android:paddingLeft="14px"
             android:id="@+id/niii"
             android:layout_marginTop="74px"
             android:layout_centerHorizontal="true"
@@ -222,7 +519,7 @@
             android:layout_marginTop="10px"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="280px">
+            android:layout_height="2100px">
             <ImageView
                 android:scaleType="fitXY"
                 android:id="@+id/fffeee"
@@ -299,7 +596,7 @@
         android:layout_marginTop="40px"
         android:layout_marginLeft="20px"
         android:background="@drawable/logo_r"
-        android:layout_width="180px"
+        android:layout_width="110px"
         android:layout_height="40px" />
 
     <TextView
@@ -375,6 +672,12 @@
             android:scaleType="fitXY"
             android:layout_width="200dp"
             android:layout_height="200dp" />
+
+
+    <View
+        android:id="@+id/baozha"
+        android:layout_width="4dp"
+        android:layout_height="4dp"/>
 
 
 </RelativeLayout>
