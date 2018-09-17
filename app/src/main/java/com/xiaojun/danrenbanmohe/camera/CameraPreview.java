@@ -95,19 +95,24 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
         restartPreview(holder);
 
-        RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) CameraPreview.this.getLayoutParams();
-        params.topMargin=-60;
-        params.height=(hh*5)/7;
-        params.bottomMargin=10;
-        CameraPreview.this.setLayoutParams(params);
-        CameraPreview.this.invalidate();
+//        try {
+//            RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) CameraPreview.this.getLayoutParams();
+//            params.topMargin=-60;
+//            params.height=(hh*5)/7;
+//            params.bottomMargin=10;
+//            CameraPreview.this.setLayoutParams(params);
+//            CameraPreview.this.invalidate();
+//
+//            RelativeLayout.LayoutParams params2= (RelativeLayout.LayoutParams) faceView.getLayoutParams();
+//            params2.topMargin=-60;
+//            params2.height=(hh*5)/7;
+//            params2.bottomMargin=10;
+//            faceView.setLayoutParams(params2);
+//            faceView.invalidate();
+//        }catch (Exception e){
+//            Log.d("CameraPreview", e.getMessage());
+//        }
 
-        RelativeLayout.LayoutParams params2= (RelativeLayout.LayoutParams) faceView.getLayoutParams();
-        params2.topMargin=-60;
-        params2.height=(hh*5)/7;
-        params2.bottomMargin=10;
-        faceView.setLayoutParams(params2);
-        faceView.invalidate();
       //  Log.d("CameraPreview", "ddddddddddddd");
     }
 

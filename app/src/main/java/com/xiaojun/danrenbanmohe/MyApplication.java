@@ -29,6 +29,10 @@ public class MyApplication extends Application implements Application.ActivityLi
     public static MyApplication myApplication;
 
 
+    static {
+        System.loadLibrary("yuv_utils");
+        System.loadLibrary("yuv");
+    }
 
     @Override
     public void onCreate() {

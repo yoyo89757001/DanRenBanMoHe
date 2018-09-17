@@ -12,7 +12,7 @@ public class PaiHangBean {
     @Id(assignable = true)
     private Long id;
     private String teZhengMa;
-    private double yanzhi;
+    private float yanzhi;
     private String fuzhi;
     private String time;
     private long trackId;
@@ -39,10 +39,10 @@ public class PaiHangBean {
     public void setTeZhengMa(String teZhengMa) {
         this.teZhengMa = teZhengMa;
     }
-    public double getYanzhi() {
+    public float getYanzhi() {
         return this.yanzhi;
     }
-    public void setYanzhi(double yanzhi) {
+    public void setYanzhi(float yanzhi) {
         this.yanzhi = yanzhi;
     }
     public String getFuzhi() {

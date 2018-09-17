@@ -61,13 +61,17 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.sdsmdg.tastytoast.TastyToast;
+import com.xiaojun.danrenbanmohe.MyApplication;
 import com.xiaojun.danrenbanmohe.R;
 import com.xiaojun.danrenbanmohe.adapter.FaceTokenAdapter;
 import com.xiaojun.danrenbanmohe.adapter.GroupNameAdapter;
+import com.xiaojun.danrenbanmohe.bean.BaoCunBean;
 import com.xiaojun.danrenbanmohe.camera.CameraManager;
 import com.xiaojun.danrenbanmohe.camera.CameraPreview;
 import com.xiaojun.danrenbanmohe.camera.CameraPreviewData;
 import com.xiaojun.danrenbanmohe.camera.SettingVar;
+import com.xiaojun.danrenbanmohe.utils.FacePassUtil;
 import com.xiaojun.danrenbanmohe.utils.FileUtil;
 import com.xiaojun.danrenbanmohe.view.FaceView;
 
@@ -90,6 +94,7 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import io.objectbox.Box;
 import megvii.facepass.FacePassException;
 import megvii.facepass.FacePassHandler;
 import megvii.facepass.types.FacePassAddFaceResult;
@@ -214,6 +219,9 @@ public class YuLanActivity extends Activity implements CameraManager.CameraListe
     private FaceImageCache mImageCache;
 
     private Handler mAndroidHandler;
+    private Box<BaoCunBean> baoCunBeanDao = null;
+    private BaoCunBean baoCunBean = null;
+    private FacePassUtil facePassUtil=null;
 
 
     @Override
@@ -224,7 +232,8 @@ public class YuLanActivity extends Activity implements CameraManager.CameraListe
         mDetectResultQueue = new ArrayBlockingQueue<byte[]>(5);
         mFeedFrameQueue = new ArrayBlockingQueue<FacePassImage>(1);
         initAndroidHandler();
-
+        baoCunBeanDao = MyApplication.myApplication.getBoxStore().boxFor(BaoCunBean.class);
+        baoCunBean = baoCunBeanDao.get(123456L);
         if (SDK_MODE == FacePassSDKMode.MODE_ONLINE) {
             recognize_url = "http://" + serverIP_online + ":8080/api/service/recognize/v1";
             serverIP = serverIP_online;
@@ -250,7 +259,7 @@ public class YuLanActivity extends Activity implements CameraManager.CameraListe
 
         mFeedFrameThread = new FeedFrameThread();
         mFeedFrameThread.start();
-
+        mFacePassHandler = MyApplication.myApplication.getFacePassHandler();
     }
 
     private void initAndroidHandler() {
@@ -286,61 +295,72 @@ public class YuLanActivity extends Activity implements CameraManager.CameraListe
 
     private void initFaceHandler() {
 
-        new Thread() {
-            @Override
-            public void run() {
-                while (!isFinishing()) {
-                    if (FacePassHandler.isAvailable()) {
-                        Log.d(DEBUG_TAG, "start to build FacePassHandler");
-                         /* FacePass SDK 所需模型， 模型在assets目录下 */
-                        trackModel = FacePassModel.initModel(getApplicationContext().getAssets(), "tracker.DT1.4.1.dingding.20180315.megface2.9.bin");
-                        poseModel = FacePassModel.initModel(getApplicationContext().getAssets(), "pose.alfa.tiny.170515.bin");
-                        blurModel = FacePassModel.initModel(getApplicationContext().getAssets(), "blurness.v5.l2rsmall.bin");
-                        livenessModel = FacePassModel.initModel(getApplicationContext().getAssets(), "panorama.facepass.offline.180312.bin");
-                        searchModel = FacePassModel.initModel(getApplicationContext().getAssets(), "feat.small.facepass.v2.9.bin");
-                        detectModel = FacePassModel.initModel(getApplicationContext().getAssets(), "detector.mobile.v5.fast.bin");
-                        ageGenderModel = FacePassModel.initModel(getApplicationContext().getAssets(), "age_gender.bin");
-                        /* SDK 配置 */
-                        float searchThreshold = 75f;
-                        float livenessThreshold = 70f;
-                        boolean livenessEnabled = true;
-                        int faceMinThreshold = 50;
-                        FacePassPose poseThreshold = new FacePassPose(30f, 30f, 30f);
-                        float blurThreshold = 0.2f;
-                        float lowBrightnessThreshold = 70f;
-                        float highBrightnessThreshold = 210f;
-                        float brightnessSTDThreshold = 60f;
-                        int retryCount = 2;
-                        int rotation = cameraRotation;
-                        String fileRootPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                        FacePassConfig config;
-                        try {
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                while (!isFinishing()) {
+//                    if (FacePassHandler.isAvailable()) {
+//                        Log.d(DEBUG_TAG, "start to build FacePassHandler");
+//                         /* FacePass SDK 所需模型， 模型在assets目录下 */
+//                        trackModel = FacePassModel.initModel(getApplicationContext().getAssets(), "tracker.DT1.4.1.dingding.20180315.megface2.9.bin");
+//                        poseModel = FacePassModel.initModel(getApplicationContext().getAssets(), "pose.alfa.tiny.170515.bin");
+//                        blurModel = FacePassModel.initModel(getApplicationContext().getAssets(), "blurness.v5.l2rsmall.bin");
+//                        livenessModel = FacePassModel.initModel(getApplicationContext().getAssets(), "panorama.facepass.offline.180312.bin");
+//                        searchModel = FacePassModel.initModel(getApplicationContext().getAssets(), "feat.small.facepass.v2.9.bin");
+//                        detectModel = FacePassModel.initModel(getApplicationContext().getAssets(), "detector.mobile.v5.fast.bin");
+//                        ageGenderModel = FacePassModel.initModel(getApplicationContext().getAssets(), "age_gender.bin");
+//                        /* SDK 配置 */
+//                        float searchThreshold = 75f;
+//                        float livenessThreshold = 70f;
+//                        boolean livenessEnabled = true;
+//                        int faceMinThreshold = 50;
+//                        FacePassPose poseThreshold = new FacePassPose(30f, 30f, 30f);
+//                        float blurThreshold = 0.2f;
+//                        float lowBrightnessThreshold = 70f;
+//                        float highBrightnessThreshold = 210f;
+//                        float brightnessSTDThreshold = 60f;
+//                        int retryCount = 2;
+//                        int rotation = cameraRotation;
+//                        String fileRootPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+//                        FacePassConfig config;
+//                        try {
+//
+//                            /* 填入所需要的配置 */
+//                            config = new FacePassConfig(searchThreshold, livenessThreshold, livenessEnabled,
+//                                    faceMinThreshold, poseThreshold, blurThreshold,
+//                                    lowBrightnessThreshold, highBrightnessThreshold, brightnessSTDThreshold,
+//                                    retryCount, rotation, fileRootPath,
+//                                    trackModel, poseModel, blurModel, livenessModel, searchModel, detectModel, ageGenderModel);
+//                            /* 创建SDK实例 */
+//                            mFacePassHandler = new FacePassHandler(config);
+//                            //checkGroup();
+//                        } catch (FacePassException e) {
+//                            e.printStackTrace();
+//                            Log.d(DEBUG_TAG, "FacePassHandler is null");
+//                            return;
+//                        }
+//                        return;
+//                    }
+//                    try {
+//                        /* 如果SDK初始化未完成则需等待 */
+//                        sleep(500);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }.start();
 
-                            /* 填入所需要的配置 */
-                            config = new FacePassConfig(searchThreshold, livenessThreshold, livenessEnabled,
-                                    faceMinThreshold, poseThreshold, blurThreshold,
-                                    lowBrightnessThreshold, highBrightnessThreshold, brightnessSTDThreshold,
-                                    retryCount, rotation, fileRootPath,
-                                    trackModel, poseModel, blurModel, livenessModel, searchModel, detectModel, ageGenderModel);
-                            /* 创建SDK实例 */
-                            mFacePassHandler = new FacePassHandler(config);
-                            //checkGroup();
-                        } catch (FacePassException e) {
-                            e.printStackTrace();
-                            Log.d(DEBUG_TAG, "FacePassHandler is null");
-                            return;
-                        }
-                        return;
-                    }
-                    try {
-                        /* 如果SDK初始化未完成则需等待 */
-                        sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }.start();
+
+
+        if (baoCunBean != null) {
+            facePassUtil = new FacePassUtil();
+            facePassUtil.init(YuLanActivity.this, getApplicationContext(), cameraRotation, baoCunBean);
+        } else {
+            Toast tastyToast = TastyToast.makeText(YuLanActivity.this, "获取本地设置失败,请进入设置界面设置基本信息", TastyToast.LENGTH_LONG, TastyToast.INFO);
+            tastyToast.setGravity(Gravity.CENTER, 0, 0);
+            tastyToast.show();
+        }
     }
 
     @Override

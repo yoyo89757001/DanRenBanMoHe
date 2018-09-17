@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -78,7 +79,7 @@ public class SheZhiActivity extends Activity {
         //在setContentView();后面加上适配语句
         ScreenAdapterTools.getInstance().loadView(getWindow().getDecorView());
         baoCunBeanDao = MyApplication.myApplication.getBoxStore().boxFor(BaoCunBean.class);
-
+        baoCunBean=baoCunBeanDao.get(123456L);
         if (baoCunBean == null) {
             baoCunBean = new BaoCunBean();
             baoCunBean.setId(123456L);
@@ -187,7 +188,10 @@ public class SheZhiActivity extends Activity {
                         try {
                             baoCunBean.setShibieFaZhi(Integer.valueOf(sbfzDialog.getFZ()));
                             baoCunBean.setShibieFaceSize(Integer.valueOf(sbfzDialog.getFaceSize()));
-                            baoCunBeanDao.put(baoCunBean);
+                            Log.d("SheZhiActivity", "baoCunBeanDao.put(baoCunBean):" + baoCunBeanDao.put(baoCunBean));
+
+                            Log.d("SheZhiActivity", "baoCunBean.getShibieFaZhi():" + baoCunBean.getShibieFaZhi());
+                            Log.d("SheZhiActivity", "baoCunBeanDao.get(123456).getShibieFaZhi():" + baoCunBeanDao.get(123456).getShibieFaZhi());
                             sbfzDialog.dismiss();
                         } catch (Exception e) {
                             e.printStackTrace();
