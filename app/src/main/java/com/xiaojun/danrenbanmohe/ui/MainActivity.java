@@ -1983,7 +1983,7 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 try {
-
+                    PaiHangBean pp=null;
                     String s = response.body().string();
                     Log.d("YanShiActivitytttttt", "检测" + s);
                     JsonObject jsonObject = GsonUtil.parse(s).getAsJsonObject();
@@ -2007,19 +2007,27 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
                                 try {
                                     //    Log.d("YanShiActivity", "bitmap.getHeight():" + bitmap.getHeight());
                                     //  Log.d("YanShiActivity", "diKuVector.get(i).getBytes().length:" + diKuVector.get(i).getBytes().length);
-                                    FacePassCompareResult result = mFacePassHandler.compare(BitmapFactory.decodeByteArray(paiHangBeanVector.get(i).getBytes(), 0, paiHangBeanVector.get(i).getBytes().length), bitmap, false);
+
+                                    final Bitmap map=BitmapFactory.decodeByteArray(paiHangBeanVector.get(i).getBytes(), 0, paiHangBeanVector.get(i).getBytes().length);
+
+//                                    runOnUiThread(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            imageView.setImageBitmap(map);
+//                                        }
+//                                    });
+                                    FacePassCompareResult result = mFacePassHandler.compare(FileUtil.scaleBitmap(map,800,800), bitmap, false);
                                    sou= result.score;
-                                    Log.d("MainActivity", "result.compareThreshold:" + result.compareThreshold);
-                                    Log.d("MainActivity", "result.livenessScore1:" + result.livenessScore1);
-                                    Log.d("MainActivity", "sou:" + sou);
-                                    Log.d("MainActivity", result.detectionResult1.rect.toString());
+
+                                   Log.d("MainActivity", "sou:" + sou);
+
 
                                 } catch (FacePassException e) {
                                     isLink = true;
                                     //  Log.d("YanShiActivity", e.getMessage()+"ggggg");
                                 }
-                                   Log.d("YanShiActivity", "sou:" + sou);
-                                if (sou >= 65) {
+                                 //  Log.d("YanShiActivity", "sou:" + sou);
+                                if (sou >= 68) {
                                     dui = 1;
                                     //通过
                                     PaiHangBean diKu = new PaiHangBean();
@@ -2087,6 +2095,7 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
                                     diKu.setBytes(bitmabToBytes(bitmap));
                                     //替换掉
                                     paiHangBeanVector.set(i, diKu);
+                                    pp=diKu;
                                     //更新界面
                                     setViewFullScreen(zhongjianview, diKu, facetoken);
                                     //计时
@@ -2173,6 +2182,7 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
                                 diKu.setBiaoqing(kk2.get(a2[6]));
                                 diKu.setBytes(bitmabToBytes(bitmap));
                                 paiHangBeanVector.add(diKu);
+                                pp=diKu;
                                 //更新界面
                                 setViewFullScreen(zhongjianview, diKu, facetoken);
                                 //计时
@@ -2253,6 +2263,7 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
                             diKu.setBiaoqing(kk2.get(a2[6]));
                             diKu.setBytes(bitmabToBytes(bitmap));
                             paiHangBeanVector.add(diKu);
+                            pp=diKu;
                             //更新界面
                             setViewFullScreen(zhongjianview, diKu, facetoken);
                             //计时
@@ -2279,12 +2290,8 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
 
                         }
 
-
-
                         //排序
-                        Log.d("YanShiActivity", "paiHangBeanVector.size():" + paiHangBeanVector.size());
-                         PaiHangBean pp=paiHangBeanVector.lastElement();
-
+                      //  Log.d("YanShiActivity", "paiHangBeanVector.size():" + paiHangBeanVector.size());
 
                                 Comparator<PaiHangBean> studentComparator2 = new Comparator<PaiHangBean>() {
                                     @Override
@@ -2304,24 +2311,30 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
 
                         int size = paiHangBeanVector.size();
                         for (int ii=0;ii<size;ii++){
+
                             if (pp.getYanzhi()==paiHangBeanVector.get(ii).getYanzhi()){
                                 paihangP=ii+1;
                                 break;
                             }
-
+                          //  Log.d("MainActivity", "pp.getYanzhi():" + pp.getYanzhi());
+                          //  Log.d("MainActivity", "paiHangBeanVector.get(ii).getYanzhi():" + paiHangBeanVector.get(ii).getYanzhi());
                         }
-                        Log.d("MainActivity", "paihangP:" + paihangP);
+                      //  Log.d("MainActivity", "paihangP:" + paihangP);
                         if (size > 6) {
-                            paiHangBeanVector.remove(0);
+                            paiHangBeanVector.remove(paiHangBeanVector.lastElement());
                         }
                         Log.d("YanShiActivitytttttt", "更新成功");
 
 
+                    }else {
+                        isLink = true;
+                        mFacePassHandler.reset();
                     }
 
                 } catch (Exception e) {
                     Log.d("YanShiActivity", e.getMessage() + "");
                     isLink = true;
+                    mFacePassHandler.reset();
                 }
 
             }
@@ -2338,7 +2351,7 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
         ByteArrayOutputStream baos = new ByteArrayOutputStream(size);
         try {
             //设置位图的压缩格式，质量为100%，并放入字节数组输出流中
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             //将字节数组输出流转化为字节数组byte[]
             return baos.toByteArray();
         } catch (Exception ignored) {
@@ -2347,9 +2360,11 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
                 bitmap.recycle();
                 baos.close();
             } catch (IOException e) {
+                Log.d("MainActivity", e.getMessage()+"bitmap转byte异常");
                 e.printStackTrace();
             }
         }
+        Log.d("MainActivity", "返回空byte[]");
         return new byte[0];
     }
 
@@ -3183,6 +3198,8 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
     public void onDataSynEvent(String event) {
         if (event.equals("mFacePassHandler")) {
             mFacePassHandler = MyApplication.myApplication.getFacePassHandler();
+
+
             // diBuAdapter = new DiBuAdapter(dibuList, MainActivity.this, dibuliebiao.getWidth(), dibuliebiao.getHeight(), mFacePassHandler);
             // dibuliebiao.setLayoutManager(gridLayoutManager);
             // dibuliebiao.setAdapter(diBuAdapter);
