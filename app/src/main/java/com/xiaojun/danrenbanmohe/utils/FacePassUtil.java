@@ -117,7 +117,8 @@ public class FacePassUtil {
                                             public void run() {
                                                 //添加明星库
                                                 try {
-                                                    int man[]={R.drawable.n1};int wmen[]={R.drawable.m1};
+                                                    int man[]={R.drawable.n1,R.drawable.n2,R.drawable.n3,R.drawable.n4,R.drawable.n5,R.drawable.n6,R.drawable.n7,R.drawable.n8};
+                                                    int wmen[]={R.drawable.m1,R.drawable.m2,R.drawable.m3,R.drawable.m4,R.drawable.m5,R.drawable.m6,R.drawable.m7,R.drawable.m8,R.drawable.m9};
 
                                                     //男明星库
                                                     for (int i=0;i<1;i++){
