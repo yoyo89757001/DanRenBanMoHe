@@ -416,20 +416,28 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
             FacePassHandler.initSDK(getApplicationContext());
             //  FaceInit init = new FaceInit(getApplicationContext());
             // init.initFacePass();
+            long t = System.currentTimeMillis();
+            String fname = DateUtils.timesTwo(t + "");
+            File file = new File(filePath + fname);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            filePath = filePath + fname;
 
+            if (baoCunBean != null) {
+                facePassUtil = new FacePassUtil();
+                facePassUtil.init(MainActivity.this, getApplicationContext(), cameraRotation, baoCunBean);
+            } else {
+                Toast tastyToast = TastyToast.makeText(MainActivity.this, "获取本地设置失败,请进入设置界面设置基本信息", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                tastyToast.show();
+            }
         }
 
         if (baoCunBean != null)
             initialTts();
 
-        if (baoCunBean != null) {
-            facePassUtil = new FacePassUtil();
-            facePassUtil.init(MainActivity.this, getApplicationContext(), cameraRotation, baoCunBean);
-        } else {
-            Toast tastyToast = TastyToast.makeText(MainActivity.this, "获取本地设置失败,请进入设置界面设置基本信息", TastyToast.LENGTH_LONG, TastyToast.INFO);
-            tastyToast.setGravity(Gravity.CENTER, 0, 0);
-            tastyToast.show();
-        }
+
 
         /* 初始化网络请求库 */
         //   requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -901,10 +909,10 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
                                         String gname;
                                         if (mow == 0) {
                                             Log.d("RecognizeThread", "男");
-                                            gname = "face-pass-test-xnan";
+                                            gname = "face-pass-test-xnan2";
                                         } else {
                                             Log.d("RecognizeThread", "女");
-                                            gname = "face-pass-test-xnv";
+                                            gname = "face-pass-test-xnv2";
                                         }
                                         FacePassRecognitionResult[] recognizeResult = mFacePassHandler.recognize(gname, detectionResult.message);
                                         Log.d("RecognizeThread", "recognizeResult.length:" + recognizeResult.length);
@@ -1109,6 +1117,14 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
                 }
                 filePath = filePath + fname;
 
+                if (baoCunBean != null) {
+                    facePassUtil = new FacePassUtil();
+                    facePassUtil.init(MainActivity.this, getApplicationContext(), cameraRotation, baoCunBean);
+                } else {
+                    Toast tastyToast = TastyToast.makeText(MainActivity.this, "获取本地设置失败,请进入设置界面设置基本信息", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                    tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                    tastyToast.show();
+                }
             }
         }
     }
@@ -1869,6 +1885,7 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
             faceView.addBlur("");
             faceView.addAge(faceAgeString.toString());
             faceView.addGenders(faceGenderString.toString());
+
             //   }
             break;
         }
@@ -2016,7 +2033,7 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
 //                                            imageView.setImageBitmap(map);
 //                                        }
 //                                    });
-                                    FacePassCompareResult result = mFacePassHandler.compare(FileUtil.scaleBitmap(map,800,800), bitmap, false);
+                                    FacePassCompareResult result = mFacePassHandler.compare(map, bitmap, false);
                                    sou= result.score;
 
                                    Log.d("MainActivity", "sou:" + sou);
@@ -3199,7 +3216,27 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
         if (event.equals("mFacePassHandler")) {
             mFacePassHandler = MyApplication.myApplication.getFacePassHandler();
 
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        for (int i=0;i<10;i++){
 
+                        Log.d("MainActivity", "mFacePassHandler.compare(BitmapFactory.decodeResource(getResources(),R.drawable.zf3),BitmapFactory.decodeResource(getResources(),R.drawable.junn),false).score:" +
+                                mFacePassHandler.compare(FileUtil.scaleBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.junn),800,800),
+                                        BitmapFactory.decodeResource(getResources(), R.drawable.junn), false).score);
+                           // 30.858118
+                           // 29.134697
+                            //27.145298
+                            //98.01972
+                            //98.293175
+                        }
+                         } catch (FacePassException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }).start();
             // diBuAdapter = new DiBuAdapter(dibuList, MainActivity.this, dibuliebiao.getWidth(), dibuliebiao.getHeight(), mFacePassHandler);
             // dibuliebiao.setLayoutManager(gridLayoutManager);
             // dibuliebiao.setAdapter(diBuAdapter);

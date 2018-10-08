@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xiaojun.danrenbanmohe">
 
-    <!--&lt;!&ndash;当用户安装 AR 必备应用时，应用商店会自动安装 ARCore。 但您的应用仍须执行额外的运行时检查，以防出现用户已卸载 ARCore 的情况&ndash;&gt;-->
-    <!--<uses-feature android:name="android.hardware.camera.ar" android:required="true" />-->
+    <!-- &lt;!&ndash;当用户安装 AR 必备应用时，应用商店会自动安装 ARCore。 但您的应用仍须执行额外的运行时检查，以防出现用户已卸载 ARCore 的情况&ndash;&gt; -->
+    <!-- <uses-feature android:name="android.hardware.camera.ar" android:required="true" /> -->
     <uses-permission android:name="com.ruitong.yunqiantai.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,54 +26,57 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
-
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".MyApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.BaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="designwidth"
             android:value="1080" />
-        <!--//设计图的宽,单位是像素,推荐用markman测量,量出来如果是750px那么请尽量去找ui设计师要一份android的设计图.-->
+        <!-- //设计图的宽,单位是像素,推荐用markman测量,量出来如果是750px那么请尽量去找ui设计师要一份android的设计图. -->
         <meta-data
             android:name="designdpi"
             android:value="480" />
-        <!--//设计图对应的标准dpi,根据下面的那张图找到对应的dpi,比如1080就对应480dpi,如果拿到的是其他宽度的设计图,那么选择一个相近的dpi就好了-->
+        <!-- //设计图对应的标准dpi,根据下面的那张图找到对应的dpi,比如1080就对应480dpi,如果拿到的是其他宽度的设计图,那么选择一个相近的dpi就好了 -->
         <meta-data
             android:name="fontsize"
             android:value="1.0" />
-        <!--//全局字体的大小倍数,有时候老板会觉得你的所有的字小了或者大了,你总不能一个一个去改吧-->
+        <!-- //全局字体的大小倍数,有时候老板会觉得你的所有的字小了或者大了,你总不能一个一个去改吧 -->
         <meta-data
             android:name="unit"
             android:value="px" />
-        <!--//你的布局里面用的是px这就写px,你的布局里面用的是dp这就写dp,要统一,不要一会儿px一会儿dp,字体也用px或者dp,不要用sp,微信qq用的肯定不是sp.-->
-        <!--宽         	240 	320 	480 	720     1080 	1440-->
-        <!--DPI等级	        LDPI	MDPI	HDPI	XHDPI	XXHDPI	XXXHDPI-->
-        <!--DPI数值	        120	160	240	320	480	640-->
+        <!-- //你的布局里面用的是px这就写px,你的布局里面用的是dp这就写dp,要统一,不要一会儿px一会儿dp,字体也用px或者dp,不要用sp,微信qq用的肯定不是sp. -->
+        <!-- 宽         	240 	320 	480 	720     1080 	1440 -->
+        <!-- DPI等级	        LDPI	MDPI	HDPI	XHDPI	XXHDPI	XXXHDPI -->
+        <!-- DPI数值	        120	160	240	320	480	640 -->
 
-        <!--<service-->
-            <!--android:name=".ljkplay.services.MediaPlayerService"-->
-            <!--android:enabled="false"-->
-            <!--android:exported="false"-->
-            <!--android:icon="@drawable/rtlogo"-->
-            <!--android:label="@string/app_name" >-->
-        <!--</service>-->
-        <activity android:name=".ui.SheZhiActivity"/>
+
+        <!-- <service -->
+        <!-- android:name=".ljkplay.services.MediaPlayerService" -->
+        <!-- android:enabled="false" -->
+        <!-- android:exported="false" -->
+        <!-- android:icon="@drawable/rtlogo" -->
+        <!-- android:label="@string/app_name" > -->
+        <!-- </service> -->
+        <activity android:name=".ui.SheZhiActivity" />
         <activity android:name=".ui.SettingActivity" />
+        <activity android:name=".ui.YuLanActivity" />
 
-        <activity android:name=".ui.YuLanActivity"/>
-        <service android:name=".dialogall.CommonDialogService"/>
+        <service android:name=".dialogall.CommonDialogService" />
+
+        <activity android:name=".ui.MainActivity"/>
     </application>
 
 </manifest>

@@ -36,8 +36,8 @@ public class FacePassUtil {
 
  private FacePassHandler mFacePassHandler;  /* 人脸识别Group */
     private  final String group_name = "face-pass-test-x";
-    private static final String group_name_mxNan = "face-pass-test-xnan";
-    private static final String group_name_mxNv = "face-pass-test-xnv";
+    private static final String group_name_mxNan = "face-pass-test-xnan2";
+    private static final String group_name_mxNv = "face-pass-test-xnv2";
     private  boolean isLocalGroupExist = false;
     private BaoCunBean baoCunBean=null;
     private int cameraRotation;
@@ -90,51 +90,6 @@ public class FacePassUtil {
                                 mFacePassHandler = new FacePassHandler(config);
 
 
-                                MyApplication.myApplication.setFacePassHandler(mFacePassHandler);
-                                try {
-
-                                    boolean a=  mFacePassHandler.createLocalGroup(group_name);
-                                    boolean a1=  mFacePassHandler.createLocalGroup(group_name_mxNan);
-                                    boolean a2=  mFacePassHandler.createLocalGroup(group_name_mxNv);
-                                    if (a && a1 && a2){
-                                        new Thread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                //添加明星库
-                                                try {
-                                                    int man[]={R.drawable.n1};int wmen[]={R.drawable.m1};
-                                                    //男明星库
-                                                    for (int i=0;i<1;i++){
-                                                        FacePassAddFaceResult result= mFacePassHandler.addFace(BitmapFactory.decodeResource(context.getResources(),man[i]));
-                                                        if (result.result==0){
-                                                            mFacePassHandler.bindGroup(group_name_mxNan,result.faceToken);
-                                                        }
-                                                    }
-                                                    //女明星库
-                                                    for (int i=0;i<1;i++){
-                                                        FacePassAddFaceResult result= mFacePassHandler.addFace(BitmapFactory.decodeResource(context.getResources(),wmen[i]));
-                                                        if (result.result==0){
-                                                            mFacePassHandler.bindGroup(group_name_mxNv,result.faceToken);
-                                                        }
-
-                                                    }
-
-                                                } catch (FacePassException e) {
-                                                    e.printStackTrace();
-                                                }
-
-                                            }
-                                        }).start();
-
-
-                                    }
-
-
-                                    Log.d("FacePassUtil", "创建组" + a);
-                                } catch (FacePassException e) {
-                                    e.printStackTrace();
-                                }
-
                                 float searchThreshold2 = 75f;
                                 float livenessThreshold2 = 48f;
                                 boolean livenessEnabled2 = true;
@@ -146,7 +101,53 @@ public class FacePassUtil {
                                 FacePassConfig config1=new FacePassConfig(faceMinThreshold2,40f,40f,40f,blurThreshold2,
                                         lowBrightnessThreshold2,highBrightnessThreshold2,brightnessSTDThreshold2);
 
-                                Log.d("YanShiActivity", "设置入库质量配置" + mFacePassHandler.setAddFaceConfig(config1));
+                                Log.d("FacePassUtil", "设置入库质量配置" + mFacePassHandler.setAddFaceConfig(config1));
+
+                                MyApplication.myApplication.setFacePassHandler(mFacePassHandler);
+
+                                try {
+
+                                 //   boolean a=  mFacePassHandler.createLocalGroup(group_name);
+                                    boolean a1=  mFacePassHandler.createLocalGroup(group_name_mxNan);
+                                    boolean a2=  mFacePassHandler.createLocalGroup(group_name_mxNv);
+
+                                    if (a1 && a2){
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                //添加明星库
+                                                try {
+                                                    int man[]={R.drawable.n1};int wmen[]={R.drawable.m1};
+
+                                                    //男明星库
+                                                    for (int i=0;i<1;i++){
+                                                        FacePassAddFaceResult result= mFacePassHandler.addFace(BitmapFactory.decodeResource(context.getResources(),man[i]));
+                                                        if (result.result==0){
+                                                            Log.d("FacePassUtil", "添加男明星" + mFacePassHandler.bindGroup(group_name_mxNan,result.faceToken));
+                                                        }
+                                                    }
+                                                    //女明星库
+                                                    for (int i=0;i<1;i++){
+                                                        FacePassAddFaceResult result= mFacePassHandler.addFace(BitmapFactory.decodeResource(context.getResources(),wmen[i]));
+                                                        if (result.result==0){
+                                                            Log.d("FacePassUtil", "添加女明星" + mFacePassHandler.bindGroup(group_name_mxNv,result.faceToken));
+                                                        }
+
+                                                    }
+
+                                                } catch (FacePassException e) {
+                                                    e.printStackTrace();
+                                                }
+
+                                            }
+                                        }).start();
+
+                                    }
+
+                                    Log.d("FacePassUtil", "创建组" + a1+a2);
+                                } catch (FacePassException e) {
+                                  Log.d("FacePassUtil", e.getMessage()+"方法撒旦");
+                                }
 
                                 activity.runOnUiThread(new Runnable() {
                                     @Override
